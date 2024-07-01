@@ -1,0 +1,66 @@
+.navbar {
+  background-color: #333333;
+  padding: 16px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+.navbar a:hover {
+  background-color: #555;
+  border-radius: 4px;
+  transition: all 0.5 ease-in-out;
+}
+
+/* learn about media quary by sawan code */
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 20px 20px;
+  }
+  .botIconDiv img {
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+  }
+  .navbar a {
+    display: none;
+  }
+}
+
+.logo {
+  text-align: center;
+  color: #fff;
+  width: 100px;
+  z-index: 100;
+  cursor: pointer;
+}
+footer {
+  background-color: #333333;
+  color: #111;
+  padding: 16px 0 10px 0;
+}
+.footer-center {
+  font-size: 19px;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+}
+.footer-content {
+}
+.footer-content a {
+  margin-left: 5px;
+  color: #fff;
+  /* text-decoration: none; */
+}

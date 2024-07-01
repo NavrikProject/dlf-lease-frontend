@@ -1,0 +1,172 @@
+ {/* <div className="App">
+        <div className="container">
+          <h1>Please select the pdf file</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="col">
+              <select
+                id="select-document"
+                value={selectedValue}
+                onChange={handleChange}
+              >
+                <option value="">Select Document</option>
+                <option value="LeasingDoc">Leasing Document</option>
+                <option value="invoice">Invoice</option>
+                <option value="bank-invoice">Invoice</option>
+                <option value="receipt">Receipt</option>
+                <option value="loan-details">Loan Details</option> 
+                <option value="compare-gst">Compare Invoice and PO</option>
+              </select>
+              {selectedValue ? "" : <span className="erroe-meg">{meg}</span>}
+              {selectedValue === "compare-gst" ? (
+                <>
+                  <div className="left-side">
+                    <label id="lable">Invoive</label>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleFirstPdfChange}
+                    />
+                  </div>
+                  <div className="left-side">
+                    <label id="lable">PO</label>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleSecondPdfChange}
+                    />{" "}
+                  </div>
+                </>
+              ) : (
+                <input type="file" accept=".pdf" onChange={handleFileChange} />
+              )}
+              <button type="submit" id="btn-extract">
+                {selectedValue === "compare-gst"
+                  ? "Compare GST Numbers"
+                  : "Extract Document"}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="cont1">
+          {selectedValue !== "compare-gst" ? (
+            <div className="below-area">
+              <div className="container-area">
+                {pdfFile && (
+                  <div>
+                    <embed
+                      src={pdfFile}
+                      type="application/pdf"
+                      style={{ width: "40vw", height: "90vh" }}
+                    />
+                  </div>
+                )}
+              </div>{" "}
+            </div>
+          ) : (
+            <>
+              <div className="below-col">
+                <div>
+                  {" "}
+                  {pdf1 && (
+                    <div>
+                      <h3>Invoice</h3>
+                      <embed
+                        src={pdf1}
+                        type="application/pdf"
+                        style={{ width: "40vw", height: "45vh" }}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  {" "}
+                  {pdf2 && (
+                    <div>
+                      <h3>Purchase Order</h3>
+                      <embed
+                        src={pdf2}
+                        type="application/pdf"
+                        style={{ width: "40vw", height: "45vh" }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+          {
+            selectedValue !== "compare-gst" ? (
+              <div>
+                {text !== "" ? (
+                  <>
+                    <h2>Extracted Text:</h2>
+                    <p className="ext-area">{text}</p>
+                  </>
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              ""
+            ) //put the GST comparison out here
+          }
+        </div>
+      </div> */}s
+
+      
+      if (name === "pdfFile1") {
+        console.log(name, value, files);
+        setFormData({
+          ...formData,
+          pdfFile1: files[0],
+          pdf1Url: URL.createObjectURL(files[0]),
+        });
+        console.log(formData.pdf1Url);
+      }
+    } else if (formData.selectOption === "compare-gst") {
+      if (name === "pdfFile1") {
+        setFormData({
+          ...formData,
+          pdfFile1: files[0],
+          pdf1Url: URL.createObjectURL(files[0]),
+        });
+      }
+      if (name === "pdfFile2") {
+        setFormData({
+          ...formData,
+          pdfFile2: files[0],
+          pdf2Url: URL.createObjectURL(files[0]),
+        });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+
+      if (formData.selectOption === "LeasingDoc") {
+      if (name === "pdfFile1") {
+        console.log(name, value, files);
+        setFormData({
+          ...formData,
+          pdfFile1: files[0],
+          pdf1Url: URL.createObjectURL(files[0]),
+        });
+        console.log(formData.pdf1Url);
+      }
+    } else if (formData.selectOption === "compare-gst") {
+      if (name === "pdfFile1") {
+        setFormData({
+          ...formData,
+          pdfFile1: files[0],
+          pdf1Url: URL.createObjectURL(files[0]),
+        });
+      }
+      if (name === "pdfFile2") {
+        setFormData({
+          ...formData,
+          pdfFile2: files[0],
+          pdf2Url: URL.createObjectURL(files[0]),
+        });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
