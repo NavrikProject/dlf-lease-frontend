@@ -4,6 +4,7 @@ import "./FileSelect.css";
 
 const FileSelect = () => {
   const [extractionResult, setExtractionResult] = useState(false);
+  const [extractedData, setExtractedData] = useState();
   const [formData, setFormData] = useState({
     selectOption: "",
     pdfFile1: null,
@@ -47,20 +48,24 @@ const FileSelect = () => {
     formDataToSend.append("pdfFile2", pdfFile2);
     setExtractionResult(true);
     // Uncomment and update with your backend endpoint to handle the form submission
-    // try {
-    //   const response = await axios.post(
-    //     "/your-backend-endpoint",
-    //     formDataToSend,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error("Error uploading file:", error);
-    // }
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:5000/upload",
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.data) {
+        setExtractedData(response.data);
+      } else {
+        console.log("There is an error uploading");
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
   };
 
   return (
@@ -186,6 +191,15 @@ const FileSelect = () => {
                       )}
                     </div>
                   )}
+                <ul>
+                  {extractedData?.map((extractedData, index) => (
+                    <li key={index}>
+                      <h3>
+                        Extracted Invoice Number: {extractedData.mention_text}
+                      </h3>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
