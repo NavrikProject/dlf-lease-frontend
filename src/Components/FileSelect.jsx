@@ -50,7 +50,7 @@ const FileSelect = () => {
     // Uncomment and update with your backend endpoint to handle the form submission
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/upload",
+        "https://dlfleasebackend.azurewebsites.net/upload",
         formDataToSend,
         {
           headers: {
