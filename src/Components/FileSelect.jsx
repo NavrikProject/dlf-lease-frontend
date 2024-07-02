@@ -5,6 +5,9 @@ import "./FileSelect.css";
 const FileSelect = () => {
   const [extractionResult, setExtractionResult] = useState(false);
   const [extractedData, setExtractedData] = useState();
+  const [loading, setLoadings] = useState(false);
+  const SupplierGST = "SUPPLIER_GST_NO:";
+  const CompanyGST = "COMPANY_GST_NO:";
   const [formData, setFormData] = useState({
     selectOption: "",
     pdfFile1: null,
@@ -41,6 +44,7 @@ const FileSelect = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoadings(true);
     const { selectOption, pdfFile1, pdfFile2 } = formData;
     const formDataToSend = new FormData();
     formDataToSend.append("selectOption", selectOption);
@@ -59,11 +63,14 @@ const FileSelect = () => {
         }
       );
       if (response.data) {
+        setLoadings(false);
         setExtractedData(response.data);
       } else {
+        setLoadings(false);
         console.log("There is an error uploading");
       }
     } catch (error) {
+      setLoadings(false);
       console.error("Error uploading file:", error);
     }
   };
@@ -91,8 +98,8 @@ const FileSelect = () => {
               onChange={handleChange}
             >
               <option value="">--Please choose an option--</option>
-              <option value="LeasingDoc">Leasing Document</option>
-              <option value="compare-gst">Compare Invoice and PO</option>
+              <option value="LeasingDoc">AR Document Extraction</option>
+              <option value="compare-gst">AP Document Extraction</option>
             </select>
             {formData.selectOption === "compare-gst" ? (
               <>
@@ -181,7 +188,7 @@ const FileSelect = () => {
               <div className="extractionContainer">
                 <h1>Extraction Result will be shown in here!</h1>
                 <hr />
-                {formData.selectOption === "compare-gst" &&
+                {/* {formData.selectOption === "compare-gst" &&
                   formData.pdf2Url && (
                     <div className="container2">
                       {extractionResult && (
@@ -190,13 +197,26 @@ const FileSelect = () => {
                         </button>
                       )}
                     </div>
-                  )}
+                  )} */}
+                {loading && <h3>Please wait...Document is extracting...</h3>}
                 <ul>
-                  {extractedData?.map((extractedData, index) => (
+                  {extractedData?.map((data, index) => (
                     <li key={index}>
                       <h3>
-                        Extracted Invoice Number: {extractedData.mention_text}
+                        {data.type}: {data.mention_text}
                       </h3>
+                      {/* {data.type === "SUPPLIER_GST_NO" &&
+                      data.type === "COMPANY_GST_NO" ? (
+                        <h3>
+                          Supplier GST({data.mention_text}) with Company GST(
+                          {data.mention_text}) is matching.
+                        </h3>
+                      ) : (
+                        <h3>
+                          Supplier GST({data.mention_text}) with Company GST(
+                          {data.mention_text}) is not matching.
+                        </h3>
+                      )} */}
                     </li>
                   ))}
                 </ul>
