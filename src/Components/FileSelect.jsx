@@ -98,8 +98,8 @@ const FileSelect = () => {
               onChange={handleChange}
             >
               <option value="">--Please choose an option--</option>
-              <option value="LeasingDoc">AR Document Extraction</option>
-              <option value="compare-gst">AP Document Extraction</option>
+              <option value="LeasingDoc">Leasing Document Extraction</option>
+              <option value="compare-gst">Invoice and PO Document Extraction</option>
             </select>
             {formData.selectOption === "compare-gst" ? (
               <>
